@@ -19,12 +19,15 @@
             android:text="Nouvelle partie"
             android:onClick="launch"
             />
-        <EditText
-            android:id="@+id/input"
-            android:layout_width="match_parent"
+        <Button
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:inputType="text"
+            android:layout_gravity="center"
+            android:text="Statistique d'un joueur"
+            android:onClick="launch"
             />
+
+
     </LinearLayout>
 
 </LinearLayout>

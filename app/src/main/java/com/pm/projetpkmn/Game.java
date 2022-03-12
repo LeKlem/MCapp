@@ -7,6 +7,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
@@ -33,9 +34,15 @@ public class Game extends AppCompatActivity {
         String pseudo = i.getStringExtra("pseudo");
         setContentView(R.layout.activity_game);
         tv = findViewById(R.id.tv1);
+    }
+
+    public void start(View view) {
+        EditText et = findViewById(R.id.input);
+        String pseudo = et.getText().toString();
         RequestTask rt = new RequestTask();
         rt.execute(pseudo);
     }
+
 
     private class RequestTask extends AsyncTask<String, Void, ArrayList<String>> {
         // Le corps de la tâche asynchrone (exécuté en tâche de fond)
@@ -77,7 +84,6 @@ public class Game extends AppCompatActivity {
                     bufferedReader = new BufferedReader(inputStreamReader2);
                     String str = bufferedReader.readLine();
                     response = "";
-                    Log.d("urll" , str);
                     while (str!= null){
                         response+=str;
                         str = bufferedReader.readLine();

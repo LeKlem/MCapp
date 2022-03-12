@@ -17,12 +17,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void launch(View view) {
         Intent intent = new Intent(this, Game.class);
-        EditText et = findViewById(R.id.input);
-        String x;
-        if(!et.getText().toString().equals("")) {
-            x = et.getText().toString();
-            intent.putExtra("pseudo", x);
-        }
         startActivity(intent);
     }
 }

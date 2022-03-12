@@ -18,6 +18,12 @@
             android:id="@+id/layoutQuizIn">
         </LinearLayout>
     </ScrollView>
+    <EditText
+        android:id="@+id/input"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        />
     <TextView
         android:id="@+id/tv1"
         android:layout_width="match_parent"
@@ -29,9 +35,10 @@
         android:id="@+id/checkButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/checkAnswer"
-        android:onClick="checkAnswers"
+        android:text="@string/Chercher"
+        android:onClick="start"
         android:layout_alignParentBottom="true"
         android:layout_centerInParent="true"
         />
+
 </RelativeLayout>
