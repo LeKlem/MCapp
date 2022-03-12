@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".Game"
+    android:id="@+id/layoutQuizOut">
+    <ScrollView
+        android:id="@+id/scroll"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/checkButton">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            tools:context=".quizActivity"
+            android:orientation="vertical"
+            android:id="@+id/layoutQuizIn">
+        </LinearLayout>
+    </ScrollView>
+    <TextView
+        android:id="@+id/tv1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text=""
+        android:layout_gravity="center"
+        />
+    <Button
+        android:id="@+id/checkButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/checkAnswer"
+        android:onClick="checkAnswers"
+        android:layout_alignParentBottom="true"
+        android:layout_centerInParent="true"
+        />
+</RelativeLayout>
