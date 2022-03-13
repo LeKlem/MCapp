@@ -13,17 +13,19 @@
 
 
         <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Nouvelle partie"
-            android:onClick="launch"
-            />
-        <Button
+            android:id="@+id/b_stats"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:text="Statistique d'un joueur"
+            android:onClick="launch"
+            />
+        <Button
+            android:id="@+id/b_news"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="News"
             android:onClick="launch"
             />
 

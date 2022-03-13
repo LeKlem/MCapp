@@ -24,7 +24,7 @@ import java.net.URL;
 import java.net.URLEncoder;
 import java.util.ArrayList;
 
-public class Game extends AppCompatActivity {
+public class StatsActivity extends AppCompatActivity {
     String API_KEY = "dc19ace9-0a20-467a-b498-42e29a529bf3";
     TextView tv;
     @Override

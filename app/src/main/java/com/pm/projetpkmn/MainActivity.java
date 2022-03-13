@@ -2,11 +2,14 @@ package com.pm.projetpkmn;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-import android.widget.EditText;
+import android.widget.Toast;
+
+import java.net.InetAddress;
 
 public class MainActivity extends AppCompatActivity {
     @Override
@@ -16,7 +19,37 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void launch(View view) {
-        Intent intent = new Intent(this, Game.class);
-        startActivity(intent);
+        Intent intent;
+        if (!isInternetAvailable()) {
+            Context context = getApplicationContext();
+            CharSequence text = "Erreur : aucune connexion!";
+            int duration = Toast.LENGTH_SHORT;
+
+            Toast toast = Toast.makeText(context, text, duration);
+            toast.show();
+
+        } else {
+            switch (view.getId()) {
+                case R.id.b_stats:
+                    intent = new Intent(this, StatsActivity.class);
+                    break;
+                case R.id.b_news:
+                    intent = new Intent(this, NewsActivity.class);
+                    break;
+                default:
+                    intent = new Intent(this, StatsActivity.class);//Supprimer la branche qu'on laisse dans défault
+            }
+            startActivity(intent);
+        }
+    }
+
+    public boolean isInternetAvailable() {
+        try {
+            InetAddress ipAddr = InetAddress.getByName("google.com");
+            return !ipAddr.equals("");
+
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
