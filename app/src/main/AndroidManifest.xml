@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.pm.projetpkmn">
 
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
@@ -12,6 +13,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.ProjetPKMN"
         android:usesCleartextTraffic="true">
+        <activity
+            android:name=".PostDetailsActivity"
+            android:exported="false" />
         <activity
             android:name=".NewsActivity"
             android:exported="false" />

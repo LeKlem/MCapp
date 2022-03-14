@@ -3,9 +3,13 @@ package com.pm.projetpkmn;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.text.LineBreaker;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -31,6 +35,7 @@ import java.util.ArrayList;
 public class NewsActivity extends AppCompatActivity {
     TextView tv;
     LinearLayout ll;
+    ArrayList<blog_post> blogList;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -91,6 +96,9 @@ public class NewsActivity extends AppCompatActivity {
                 blog.setTitle(obj.getString("title"));
                 JSONObject img = obj.getJSONObject("coverImage");
                 blog.setImgUrl(img.getString("s3Key"));
+                blog.setSmallContent(obj.getString("bodyExcerpt"));
+                blog.setSmallContent(blog.getSmallContent().substring(0, 200));
+                blog.setSlug(obj.getString("slug"));
                 blogList.add(blog);
                 i++;
             }
@@ -100,7 +108,8 @@ public class NewsActivity extends AppCompatActivity {
             display_blog(blogList);
         }
     }
-    protected void display_blog(ArrayList<blog_post> blogList){
+    protected void display_blog(ArrayList<blog_post> bl){
+        blogList = bl;
         //generatedId = View.generateViewId();
         int i = 0;
         while(i < blogList.size()) {
@@ -108,20 +117,29 @@ public class NewsActivity extends AppCompatActivity {
             CardView cv = new CardView(this);
             cv.setId(i);
             cv.setCardElevation(10);
+            cv.setMinimumHeight(500);
             cv.setOnClickListener(openDetails);
             cv.setPreventCornerOverlap(true);
             cv.setCardBackgroundColor(0);
             cv.setUseCompatPadding(true);
             ImageView iv = new ImageView(this);
-            iv.setMinimumWidth(200);
-            iv.setMaxWidth(200);
-            iv.setMinimumHeight(200);
-            iv.setMaxHeight(200);
-            Picasso.get().load(post.getImgUrl()).into(iv);
+            Picasso.get().load(post.getImgUrl()).fit().into(iv);
             iv.setContentDescription("tu le c");
+            TextView titre = new TextView(this);
+            titre.setText(post.getTitle());
+            titre.setTextColor(Color.WHITE);
+            titre.setGravity(Gravity.BOTTOM | Gravity.CENTER_HORIZONTAL);
+            titre.setPadding(0, 0, 0, 220);
+            titre.setTextSize(18);
+            iv.setPadding(20, 20, 20, 200);
             TextView tv = new TextView(this);
-            tv.setText(post.getTitle());
+            tv.setText(post.getSmallContent());
+            tv.setGravity(Gravity.BOTTOM);
+            tv.setPadding(30, 10, 30, 20);
+            tv.setJustificationMode(LineBreaker.JUSTIFICATION_MODE_INTER_WORD);
+
             cv.addView(iv);
+            cv.addView(titre);
             cv.addView(tv);
             ll.addView(cv);
             i++;
@@ -129,7 +147,10 @@ public class NewsActivity extends AppCompatActivity {
     }
     private View.OnClickListener openDetails = new View.OnClickListener() {
         public void onClick(View v) {
-            Log.d("clicked", String.valueOf(v.getId()));
+            blog_post post = blogList.get(v.getId());
+            Intent intent = new Intent(v.getContext(), PostDetailsActivity.class);
+            intent.putExtra("slug", post.getSlug());
+            startActivity(intent);
         }
     };
 

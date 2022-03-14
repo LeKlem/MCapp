@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import java.io.IOException;
 import java.net.InetAddress;
 
 public class MainActivity extends AppCompatActivity {
@@ -20,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void launch(View view) {
         Intent intent;
-        if (!isInternetAvailable()) {
+        if (false) {
             Context context = getApplicationContext();
             CharSequence text = "Erreur : aucune connexion!";
             int duration = Toast.LENGTH_SHORT;
@@ -40,16 +42,6 @@ public class MainActivity extends AppCompatActivity {
                     intent = new Intent(this, StatsActivity.class);//Supprimer la branche qu'on laisse dans défault
             }
             startActivity(intent);
-        }
-    }
-
-    public boolean isInternetAvailable() {
-        try {
-            InetAddress ipAddr = InetAddress.getByName("google.com");
-            return !ipAddr.equals("");
-
-        } catch (Exception e) {
-            return false;
         }
     }
 }
